@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from backend.rag import rag_agent
 from backend.data_models import Prompt
-
+import logfire
 
 app = FastAPI()
+
+logfire.configure()
+logfire.instrument_pydantic_ai()
+logfire.instrument_fastapi(app)
 
 @app.post("/rag/query")
 async def query_documentation(query: Prompt):
