@@ -22,4 +22,6 @@ if __name__ == '__main__':
         pdf_text = extract_text_from_pdf(pdf_path)
 
         filename = pdf_path.stem + ".txt"
-    print(DATA_PATH)
+
+        export_txt(pdf_text, DATA_PATH / filename)
+
