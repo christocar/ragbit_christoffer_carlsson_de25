@@ -18,4 +18,8 @@ def export_txt(text, path):
         f.write(text)
 
 if __name__ == '__main__':
+    for pdf_path in DATA_PATH.glob("*.pdf"):
+        pdf_text = extract_text_from_pdf(pdf_path)
+
+        filename = pdf_path.stem + ".txt"
     print(DATA_PATH)
