@@ -2,13 +2,14 @@ from pydantic_ai import Agent
 from backend.data_models import RagResponse
 from backend.constants import VECTOR_DATABASE_PATH
 import lancedb
+from backend.model import nvidia_model
 
 
 vector_db = lancedb.connect(uri=VECTOR_DATABASE_PATH)
 
 
 rag_agent = Agent(
-    model=,
+    model=nvidia_model(),
     retries=2,
     instructions=(
         "You are an expert in rabbit races and knows how to distinguish between the rabbits",
@@ -19,3 +20,21 @@ rag_agent = Agent(
     ),
     output_type=RagResponse,
 )
+
+
+@rag_agent.tool_plain
+def retrieve_top_document(query: str) -> str:
+    """
+    vector search to match closest document to the query
+    """
+    results = vector_db["articles"].search(query=query).to_list()
+
+    return f"""
+    
+    Filename: {results[0]["filename"]},
+    
+    Filepath: {results[0]["filepath"]},
+
+    Content: {results[0]["content"]}
+    
+    """
