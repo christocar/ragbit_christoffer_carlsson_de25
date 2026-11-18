@@ -5,6 +5,9 @@ import logfire
 
 app = FastAPI()
 
+# in .env
+# LOGFIRE_TOKEN=...
+
 logfire.configure()
 logfire.instrument_pydantic_ai()
 logfire.instrument_fastapi(app)
