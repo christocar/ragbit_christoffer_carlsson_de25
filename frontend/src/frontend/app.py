@@ -29,7 +29,7 @@ def layout():
         st.markdown("## Source:")
         st.markdown(data["filepath"])
  
-        st.image(ASSETS_PATH / f"{data['filename']}.png")
+        st.image(ASSETS_PATH / f"{data['filename'].casefold()}.png")
 
 if __name__ == "__main__":
     layout()
