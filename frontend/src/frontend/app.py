@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
 from pathlib import Path
+import os 
+
+BASE_URL = os.getenv("API_URL", default="http://localhost:8000")
 
 ASSETS_PATH = Path(__file__).absolute().parents[1] / "assets"
 
@@ -12,7 +15,7 @@ def layout():
 
     if st.button("Send") and text_input.strip() != "":
         response = requests.post(
-            "http://127.0.0.1:8000/rag/query", json={"prompt": text_input}
+            f"{BASE_URL}/rag/query", json={"prompt": text_input}
         )
 
         data = response.json()

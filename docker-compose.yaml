@@ -10,3 +10,16 @@ services:
     env_file:
       - .env
     image: backend:v1
+
+  frontend:
+    container_name: frontend
+    build:
+      context: . # this folder
+      dockerfile: dockerfiles/frontend.dockerfile
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    environment:
+      - API_URL=http://backend:8000
+    image: frontend:v1
