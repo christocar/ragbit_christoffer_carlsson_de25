@@ -11,6 +11,7 @@ app = FastAPI()
 logfire.configure()
 logfire.instrument_pydantic_ai()
 logfire.instrument_fastapi(app)
+logfire.instrument_httpx()
 
 @app.post("/rag/query")
 async def query_documentation(query: Prompt):
