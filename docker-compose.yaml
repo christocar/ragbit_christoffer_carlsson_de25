@@ -1,0 +1,12 @@
+services:
+  backend:
+    container_name: backend
+    build:
+      context: . # this folder
+      dockerfile: dockerfiles/backend.dockerfile
+    ports:
+      - "8000:8000"
+    # injects variables from .env into the container that we spin up
+    env_file:
+      - .env
+    image: backend:v1
